@@ -1,6 +1,6 @@
 class ChallengesController < ApplicationController
 
-
+	before_filter :load_challenge, only: [:show, :edit, :destroy]
 
 	def index
 		# @challenges = Challenge.order('created_at DESC').limit(10)
@@ -14,7 +14,6 @@ class ChallengesController < ApplicationController
 	end
 
 	def show
-		@challenge = Challenge.find params[:id]
 		@vote = @challenge.votes.new
 		@total = @challenge.votes.count_mails(params[:id])
 	end
@@ -31,7 +30,7 @@ class ChallengesController < ApplicationController
 	end
 
 	def edit
-		@challenge = Challenge.find params[:id]
+		
 	end
 
 	def update
@@ -43,7 +42,6 @@ class ChallengesController < ApplicationController
 	end
 	
 	def destroy
-		@challenge = Challenge.find params[:id]
 		if @challenge.destroy
 			flash[:notice] = "Callenge delete successfully"
 		end
@@ -56,5 +54,11 @@ class ChallengesController < ApplicationController
 	def challenge_params 
  		params.require(:challenge).permit(:title, :description)
 	end
+
+	def load_challenge
+		@challenge = Challenge.find params[:id]
+	end
+
+	
 
 end
