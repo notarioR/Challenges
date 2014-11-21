@@ -1,12 +1,14 @@
+<div class="flash_success"><%= flash[:notice] %></div>
+<div class="flash"><%= flash[:error] %></div>
 <section class="center">
+
 <h1> Challenge </h1>
 <div class="title_challenge"><h2>Title</h2><%= @challenge.title %></div><br>
 <div class="description_challenge"><b>Description: </b></div>
 <div><%= @challenge.description %></div>
 
 <h1>Add vote</h1>
-<div class="flash_success"><%= flash[:notice] %></div>
-<div class="flash"><%= flash[:error] %></div>
+
 
 <%= form_for [@challenge, @vote] do |f| %>
   <%= f.label :mail %>
