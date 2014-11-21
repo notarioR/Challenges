@@ -10,6 +10,7 @@
 		<li>
 		<%= link_to c.title, challenge_path(c) %> -
 		<%= c.created_at %>
+		<%= link_to("Edit", edit_challenge_path(c)) %>
 		</li>
 	<% end %>
 	<button><%= link_to("Add new challenges", new_challenge_path) %></button>	

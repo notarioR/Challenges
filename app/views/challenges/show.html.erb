@@ -5,8 +5,8 @@
 <div><%= @challenge.description %></div>
 
 <h1>Add vote</h1>
-<%= flash[:notice] %>
-<%= flash[:error] %>
+<div class="flash_success"><%= flash[:notice] %></div>
+<div class="flash"><%= flash[:error] %></div>
 
 <%= form_for [@challenge, @vote] do |f| %>
   <%= f.label :mail %>
@@ -15,7 +15,7 @@
 <% end %>
 <div class="votes"><h2>Votes count: <%= @total %></div></h2>
 <button><%= link_to("Back", challenges_path) %></button>
- <button><%= link_to("Delete", challenge_path(@challenge), method: :delete) %></button>
+ <button><%= link_to("Delete", challenge_path(@challenge), method: :delete, data: {confirm: 'Are you sure?'}) %></button>
 
 </section>
 

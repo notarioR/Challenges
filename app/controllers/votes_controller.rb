@@ -14,9 +14,11 @@ class VotesController < ApplicationController
 	# end
 
 	def create
-		@vote = Challenge.find(params[:challenge_id]).votes.new vote_params
+		@challenge = Challenge.find params[:challenge_id]
+		@vote = @challenge.votes.new vote_params
 		if @vote.save
 			flash[:notice] = "Vote add successfully"
+			UserMailer.new_vote(@challenge,@vote).deliver
 			redirect_to challenge_path(params[:challenge_id])
 		else
 			flash[:error] = "Error"
