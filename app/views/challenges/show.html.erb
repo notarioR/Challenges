@@ -1,0 +1,24 @@
+<section class="center">
+<h1> Challenge </h1>
+<div class="title_challenge"><h2>Title</h2><%= @challenge.title %></div><br>
+<div class="description_challenge"><b>Description: </b></div>
+<div><%= @challenge.description %></div>
+
+<h1>Add vote</h1>
+<%= flash[:notice] %>
+<%= flash[:error] %>
+
+<%= form_for [@challenge, @vote] do |f| %>
+  <%= f.label :mail %>
+  <%= f.text_field :mail %>
+  <%= f.submit 'Vote' %>
+<% end %>
+<div class="votes"><h2>Votes count: <%= @total %></div></h2>
+<button><%= link_to("Back", challenges_path) %></button>
+ <button><%= link_to("Delete", challenge_path(@challenge), method: :delete) %></button>
+
+</section>
+
+
+
+

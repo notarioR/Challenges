@@ -1,0 +1,17 @@
+<section class="center">
+	<div class="flash_success"><%= flash[:notice] %></div>
+
+	<%= form_tag challenges_path, method: :get do %>
+ 	<%= search_field_tag :q, params[:q], placeholder: "Search a challenge" %>
+	<% end %>
+	
+	<h1> CHALLENGES </h1>
+	<% @challenges.each do |c| %>
+		<li>
+		<%= link_to c.title, challenge_path(c) %> -
+		<%= c.created_at %>
+		</li>
+	<% end %>
+	<button><%= link_to("Add new challenges", new_challenge_path) %></button>	
+</section>
+
