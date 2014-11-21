@@ -39,3 +39,6 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'letter_opener'
 gem 'pry-rails'
+gem 'will_paginate'
+gem 'carrierwave'
+gem 'mini_magick'

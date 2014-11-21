@@ -2,11 +2,18 @@ class ChallengesController < ApplicationController
 
 	before_filter :load_challenge, only: [:show, :edit, :destroy]
 
+	PER_PAGE = 10
+
 	def index
-		# @challenges = Challenge.order('created_at DESC').limit(10)
 		search_to_str = params[:q] || ""
 	    search_to_str ='%' + search_to_str + '%'
-	    @challenges = Challenge.where("title like ?", search_to_str).order(created_at: :desc)
+	    @challenges = Challenge.where("title like ?", search_to_str).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+
+	    if params[:page]
+			page = params[:page].to_i
+			offset = (page-1) * PER_PAGE
+			@challenges = @challenges.offset(offset)
+		end
 	end
 
 	def new
@@ -24,7 +31,7 @@ class ChallengesController < ApplicationController
 			flash[:notice] = "Challenge create successfully"
 			redirect_to challenges_path
 		else
-			flash[:error] = "Error"
+			flash[:error] = @challenge.errors.messages
 			render 'new'
 		end
 	end
@@ -52,7 +59,7 @@ class ChallengesController < ApplicationController
 	private
 	
 	def challenge_params 
- 		params.require(:challenge).permit(:title, :description)
+ 		params.require(:challenge).permit(:title, :description, :poster)
 	end
 
 	def load_challenge
@@ -60,5 +67,4 @@ class ChallengesController < ApplicationController
 	end
 
 	
-
 end

@@ -8,11 +8,17 @@
 	<h1> CHALLENGES </h1>
 	<% @challenges.each do |c| %>
 		<li>
+		<%= image_tag c.poster.url(:thumb) %>
 		<%= link_to c.title, challenge_path(c) %> -
-		<%= c.created_at %>
+		<%= c.created_at.strftime("%d %b %y") %>
 		<%= link_to("Edit", edit_challenge_path(c)) %>
 		</li>
 	<% end %>
-	<button><%= link_to("Add new challenges", new_challenge_path) %></button>	
+	<button><%= link_to("Add new challenges", new_challenge_path) %></button>
+	 
+      <div class="page_info"><%= page_entries_info @challenges %></div>
+  
+	<div class="digg_pagination"><%= will_paginate @challenges %></div>
+	
 </section>
 
